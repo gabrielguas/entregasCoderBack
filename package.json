@@ -1,16 +1,17 @@
 {
-  "name": "entregascoderback",
+  "name": "primerdesafio",
   "version": "1.0.0",
-  "description": "Entregas del curso de backend coderhouse",
-  "main": "ProductManager.js",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.js" 
+    "dev": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
-  }
+   }
 }

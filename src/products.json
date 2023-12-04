@@ -1,0 +1,105 @@
+[
+    {
+        "title": "miTituloActualizado2",
+        "description": "miDescriptionActualizado2",
+        "price": 1005,
+        "code": "miCodigoActualizado2",
+        "stock": 2010,
+        "category": "miCategoriaActualizado2",
+        "ID": 3
+    },
+    {
+        "title": "miTituloActualizado",
+        "description": "miDescriptionActualizado",
+        "price": 100,
+        "code": "miCodigoActualizado",
+        "stock": 200,
+        "category": "miCategoriaActualizado",
+        "ID": 4
+    },
+    {
+        "title": "miTituloActualizado",
+        "description": "miDescriptionActualizado",
+        "price": 100,
+        "code": "miCodigoActualizado",
+        "stock": 200,
+        "category": "miCategoriaActualizado",
+        "ID": 5
+    },
+    {
+        "ID": 6,
+        "title": "Producto 6",
+        "description": "Descripción 6",
+        "price": 69.99,
+        "thumbnail": "thumbnail6.jpg",
+        "code": "PQR678",
+        "stock": 15,
+        "category": "Category3",
+        "thumbnails": [
+            "thumbnail6.jpg"
+        ]
+    },
+    {
+        "ID": 7,
+        "title": "Producto 7",
+        "description": "Descripción 7",
+        "price": 79.99,
+        "thumbnail": "thumbnail7.jpg",
+        "code": "STU901",
+        "stock": 25,
+        "category": "Category1",
+        "thumbnails": [
+            "thumbnail7.jpg"
+        ]
+    },
+    {
+        "ID": 8,
+        "title": "Producto 8",
+        "description": "Descripción 8",
+        "price": 89.99,
+        "thumbnail": "thumbnail8.jpg",
+        "code": "VWX234",
+        "stock": 35,
+        "category": "Category2",
+        "thumbnails": [
+            "thumbnail8.jpg"
+        ]
+    },
+    {
+        "ID": 9,
+        "title": "Producto 9",
+        "description": "Descripción 9",
+        "price": 99.99,
+        "thumbnail": "thumbnail9.jpg",
+        "code": "YZA567",
+        "stock": 45,
+        "category": "Category3",
+        "thumbnails": [
+            "thumbnail9.jpg"
+        ]
+    },
+    {
+        "ID": 10,
+        "title": "Producto 10",
+        "description": "Descripción 10",
+        "price": 109.99,
+        "thumbnail": "thumbnail10.jpg",
+        "code": "BCD890",
+        "stock": 55,
+        "category": "Category1",
+        "thumbnails": [
+            "thumbnail10.jpg"
+        ]
+    },
+    {
+        "ID": 11,
+        "title": "miTitulo",
+        "description": "miDescription",
+        "code": "miCodigo",
+        "price": 100,
+        "status": true,
+        "stock": 200,
+        "category": "miCategoria",
+        "thumbnails": []
+    }
+]
