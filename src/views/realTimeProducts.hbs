@@ -12,6 +12,11 @@
     <div>
         <h1>Estás realtimeProducts - {{ nombre }}</h1>
         <form>
+            <label for="productId">Eliminar por ID:</label>
+            <input type="number" id="productId" name="productId" required>
+            <input type="submit" value="Eliminar" id="deleteProduct">
+        </form>
+        <form>
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" value="Título precargado">
 

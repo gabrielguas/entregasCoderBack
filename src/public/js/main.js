@@ -20,8 +20,6 @@ socket.on("sendProducts", (data) => {
 const btnAdd = document.querySelector("#addProduct")
 btnAdd.addEventListener("click", (e) => {
     e.preventDefault()
-    console.log("Estoy en el boton");
-
     const newProduct = {
         title: document.getElementById("title").value,
         description: document.getElementById("description").value,
@@ -33,4 +31,11 @@ btnAdd.addEventListener("click", (e) => {
         thumbnails: [document.getElementById("thumbnails").value]
     };
     socket.emit("newProduct", newProduct)
+})
+
+const btnDelete = document.querySelector("#deleteProduct")
+btnDelete.addEventListener("click", (e) => {
+    e.preventDefault()
+    const idDelete = document.getElementById("productId").value
+    socket.emit("deleteProduct", idDelete)
 })

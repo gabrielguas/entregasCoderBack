@@ -1,18 +1,5 @@
 [
   {
-    "ID": 1,
-    "title": "Producto 1",
-    "description": "Descripción 1",
-    "price": 69.99,
-    "thumbnail": "thumbnail1.jpg",
-    "code": "PQR678",
-    "stock": 15,
-    "category": "Category3",
-    "thumbnails": [
-      "thumbnail1.jpg"
-    ]
-  },
-  {
     "ID": 2,
     "title": "Producto 2",
     "description": "Descripción 2",

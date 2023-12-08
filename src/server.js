@@ -57,4 +57,8 @@ socketServer.on('connection', (socketClient) => {
     socketClient.on("newProduct", (data) => {
         pm.addProduct(data)
     })
+
+    socketClient.on("deleteProduct", (ID) =>{
+        pm.deleteProduct(ID)
+    } )
 })
