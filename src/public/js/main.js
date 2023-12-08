@@ -7,6 +7,7 @@ socket.emit("message", "Mensaje desde el cliente");
 socket.on("sendProducts", (data) => {
     console.log(data);
     const newList = document.getElementById("products")
+    newList.innerHTML = "";
     data.forEach(prod => {
         newList.innerHTML += `<strong>ID:</strong> ${prod.ID}<br>`;
         newList.innerHTML += `<strong>Title:</strong> ${prod.title}<br>`;

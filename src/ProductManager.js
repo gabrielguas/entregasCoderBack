@@ -50,8 +50,7 @@ class ProductManager {
 
     getProducts() {
         try {
-            // const limit = parseInt(req.query.limit);
-            const limit = 0;
+            const limit = 0; // Para que funcione por ahora .. cambiar luego
 
             if (!isNaN(limit) && limit > 0) {
                 const limitedProducts = this.products.slice(0, limit);

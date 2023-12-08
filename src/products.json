@@ -141,5 +141,57 @@
     "thumbnails": [
       "URL_de_la_miniatura"
     ]
+  },
+  {
+    "ID": 12,
+    "title": "Título precargado",
+    "description": "Descripción precargada",
+    "code": "Código precargadoqwe",
+    "price": 100,
+    "status": true,
+    "stock": 50,
+    "category": "Categoría precargada",
+    "thumbnails": [
+      "URL_de_la_miniatura"
+    ]
+  },
+  {
+    "ID": 13,
+    "title": "Título precargado",
+    "description": "Descripción precargada",
+    "code": "Código precargados",
+    "price": 100,
+    "status": true,
+    "stock": 50,
+    "category": "Categoría precargada",
+    "thumbnails": [
+      "URL_de_la_miniatura"
+    ]
+  },
+  {
+    "ID": 14,
+    "title": "Título precargado",
+    "description": "Descripción precargada",
+    "code": "Código precargadosasd",
+    "price": 100,
+    "status": true,
+    "stock": 50,
+    "category": "Categoría precargada",
+    "thumbnails": [
+      "URL_de_la_miniatura"
+    ]
+  },
+  {
+    "ID": 15,
+    "title": "Título precargadodf",
+    "description": "Descripción precargada",
+    "code": "Código precargadosasdg",
+    "price": 100,
+    "status": true,
+    "stock": 50,
+    "category": "Categoría precargada",
+    "thumbnails": [
+      "URL_de_la_miniatura"
+    ]
   }
 ]
