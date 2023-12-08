@@ -22,37 +22,42 @@ class ProductManager {
         const data = JSON.stringify(this.products, null, 2);
         writeFileSync(this.path, data);
     }
-    addProduct(title, description, price, code, stock, category, thumbnails) {
+    
+    addProduct(newProduct) {
+        const { title, description, price, code, stock, category, thumbnails } = newProduct;
+    
         if (title && description && price && code && stock && category) {
             if (this.validateCode(code)) {
                 const newID = this.products.length > 0 ? this.products[this.products.length - 1].ID + 1 : 1;
                 const productThumbnails = thumbnails || [];
-
-                const newProduct = new Product(newID, title, description, code, price, true, stock, category, productThumbnails);
-                this.products.push(newProduct);
+    
+                const product = new Product(newID, title, description, code, price, true, stock, category, productThumbnails);
+                this.products.push(product);
                 this.saveProducts();
-                return { mensaje: "El producto se agreg+o correctamente.." };
+                return { mensaje: "El producto se agregó correctamente." };
             } else {
-                return { mensaje: "Ya existe producto con ese codigo." };
+                return { mensaje: "Ya existe un producto con ese código." };
             }
         } else {
             return { mensaje: "Todos los campos son obligatorios (excepto thumbnails)." };
         }
     }
+    
 
     validateCode(code) {
         return !this.products.some(product => product.code === code);
     }
 
-    getProducts(req, res) {
+    getProducts() {
         try {
-            const limit = parseInt(req.query.limit);
+            // const limit = parseInt(req.query.limit);
+            const limit = 0;
 
             if (!isNaN(limit) && limit > 0) {
                 const limitedProducts = this.products.slice(0, limit);
-                res.json(limitedProducts);
+                return limitedProducts;
             } else {
-                res.json(this.products);
+                return this.products;
             }
         } catch (error) {
             console.error('Error al procesar la solicitud', error);

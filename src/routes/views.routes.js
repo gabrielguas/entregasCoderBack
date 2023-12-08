@@ -12,15 +12,19 @@ router.get('/', (req, res) => {
 });
 
 router.get('/realtimeproducts', (req, res) => {
-    res.render("realTimeProducts.hbs", {
-        // seguir acá
+    res.render("realTimeProducts",  {
+        title: "Titulo",
+        nombre: "Gabriel"
     });
 });
 
+
+
+// CAMBIAR getProducts para traer todo sin la cagada del req res
 router.get('/home', async (req, res) => {
     try {
         const productsData = await pm.getProducts(req, res);
-        res.render('home.hbs', { productsData });
+        res.render('home', { products: productsData });
     } catch (error) {
         console.error("Error al obtener productos:", error);
         res.status(500).send("Error interno del servidor");

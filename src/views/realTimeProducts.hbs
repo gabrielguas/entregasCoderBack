@@ -1,0 +1,33 @@
+<div>
+    <h1>
+        Estas en r3al t1m3s {{ nombre }}
+    </h1>
+    <ul id="products">
+    </ul>
+    <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="Título precargado">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description">Descripción precargada</textarea>
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code" value="Código precargado">
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" value="100.00">
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="active" selected>Activo</option>
+            <option value="inactive">Inactivo</option>
+        </select>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" value="50">
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" value="Categoría precargada">
+        <label for="thumbnails">Thumbnails:</label>
+        <input type="text" id="thumbnails" name="thumbnails" value="URL_de_la_miniatura">
+        <input type="submit" value="Agregar" id="addProduct">
+    </form>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+</div>

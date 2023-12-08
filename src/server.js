@@ -5,6 +5,8 @@ import handlebars from 'express-handlebars'
 import __dirname from "./utils.js";
 import viewRouter from './routes/views.routes.js'
 import { Server } from 'socket.io'
+import ProductManager from "./ProductManager.js";
+
 
 const app = express();
 const httpServer = app.listen(8080, () => console.log("Server listening on port 8080"));
@@ -42,9 +44,17 @@ app.use("/api/carts", cartsRouter);
 // comunicacion del socket
 
 socketServer.on('connection', (socketClient) => {
+    const pm = new ProductManager('./src/products.json');
+    const products = pm.getProducts();
     console.log("Nuevo cliente conectado");
 
     socketClient.on("message", (data) => {
         console.log(data);
+    })
+    socketClient.emit("sendProducts",products)
+
+
+    socketClient.on("newProduct", (data) => {
+        pm.addProduct(data)
     })
 })
