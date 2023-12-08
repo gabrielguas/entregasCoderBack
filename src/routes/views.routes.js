@@ -19,8 +19,6 @@ router.get('/realtimeproducts', (req, res) => {
 });
 
 
-
-// CAMBIAR getProducts para traer todo sin la cagada del req res
 router.get('/home', async (req, res) => {
     try {
         const productsData = await pm.getProducts(req, res);
