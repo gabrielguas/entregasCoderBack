@@ -1,5 +1,3 @@
-
-
 const socket = io();
 console.log("Hola desde el cliente ;)");
 socket.emit("message", "Mensaje desde el cliente");
