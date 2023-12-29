@@ -18,13 +18,16 @@
         </div>
       {{/each}}
 
-      {{#if products.hasNextPage}}
-        <a href="?page={{products.nextPage}}">Siguiente</a>
-      {{/if}}
 
-      {{#if products.hasPrevPage}}
-        <a href="?page={{products.prevPage}}">Anterior</a>
-      {{/if}}
+<!-- Estoy intentando que al cambiar de pagina por ejemplo : http://localhost:8080/api/products?sort=asc al hacer click en siguiente no vaya a    http://localhost:8080/api/products/?page=2 -->
+{{#if products.hasNextPage}}
+  <a href="?page={{products.nextPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}">Siguiente</a>
+{{/if}}
+
+{{#if products.hasPrevPage}}
+  <a href="?page={{products.prevPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}">Anterior</a>
+{{/if}}
+
     </div>
   </body>
 </html>
