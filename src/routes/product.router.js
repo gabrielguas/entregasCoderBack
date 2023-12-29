@@ -1,22 +1,50 @@
 import { Router } from "express";
-import ProductManager from "../ProductManager.js";
+import productDao from "../Dao/dbManager/product.dao.js";
 
 const router = Router();
 
-const pm = new ProductManager('./src/products.json')
-
-const getProducts_middleware = async (req, res, next) => {
-  const products = pm.getProducts(req, res);
-  req.products = products;
-  next();
-};
-
-router.get("/", getProducts_middleware, (req, res) => {
-  const { products } = req;
-  res.json(
-    { products }
-  );
+// Obtener todos los productos
+router.get("/", async (req, res) => {
+  try {
+    const products = await productDao.getAllProductsPaginate(req);
+    console.log(products);
+    res.render("home", {
+      products,
+    })
+  } catch (error) {
+    console.error("Error al obtener productos:", error.message);
+    res.status(500).json({ error: "Error al obtener productos" });
+  }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Agregar un producto
+router.post("/", async (req, res) => {
+  try {
+    const product = req.body;
+    const createdProduct = await productDao.createProduct(product);
+    console.log("Producto creado con éxito:", createdProduct);
+    console.log("Datos del producto:", product);
+    res.status(201).json(createdProduct);
+  } catch (error) {
+    console.error("Error al crear el producto:", error.message);
+    res.status(500).json({ error: "Error al crear el producto" });
+  }
+});
+
+
 
 const getProductByID_middleware = (req, res, next) => {
   const { ID } = req.params;
@@ -28,20 +56,6 @@ const getProductByID_middleware = (req, res, next) => {
 router.get("/:ID", getProductByID_middleware, (req, res) => {
   const { product } = req;
   res.json({ product });
-});
-
-
-// Middleware para agregar producto
-const agregarProductoMiddleware = (req, res, next) => {
-  const { title, description, price, code, stock, category, thumbnails } = req.body;
-  const resultado = pm.addProduct(title, description, price, code, stock, category, thumbnails);
-  res.locals.resultado = resultado;
-  next();
-};
-
-router.post("/", agregarProductoMiddleware, (req, res) => {
-  const resultado = res.locals.resultado;
-  res.status(201).json(resultado);
 });
 
 

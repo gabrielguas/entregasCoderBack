@@ -1,25 +1,35 @@
 import express from "express";
 import productRouter from './routes/product.router.js'
-import cartsRouter from './routes/carts.router.js'
 import handlebars from 'express-handlebars'
 import __dirname from "./utils.js";
 import viewRouter from './routes/views.routes.js'
 import { Server } from 'socket.io'
-import ProductManager from "./ProductManager.js";
-
+import mongoose from "mongoose";
+import Handlebars from "handlebars";
+import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
+//import { cartsRouter } from './routes/carts.router.js'
 
 const app = express();
 const httpServer = app.listen(8080, () => console.log("Server listening on port 8080"));
 
 const socketServer = new Server(httpServer);
 
+mongoose.connect(`mongodb+srv://guasgabriel22:FanoQ6mSsi7a1iwu@curso-backend-ch.j0ycecz.mongodb.net/entregaDB?retryWrites=true&w=majority`).then((res) => {
+  console.log("DB connected!");
+})
+
+
 
 // Engine
+app.engine(
+  "hbs",
+  handlebars.engine({
+    extname: "hbs",
+    defaultLayout: "main",
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+  })
+);
 
-app.engine('hbs', handlebars.engine({
-    extname: 'hbs',
-    defaultLayout: 'main'
-}))
 
 // Seteo el motor
 
@@ -38,7 +48,7 @@ app.use("/", viewRouter)
 
 // Routes
 app.use("/api/products", productRouter);
-app.use("/api/carts", cartsRouter);
+//app.use("/api/carts", cartsRouter);
 
 
 // comunicacion del socket

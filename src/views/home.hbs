@@ -1,11 +1,30 @@
-<div>
-    {{#each products}}
-    <div class="producto">
-        <strong>ID:</strong> {{ID}}<br>
-        <strong>Titulo:</strong> {{title}}<br>
-        <strong>Descripcion:</strong> {{description}}<br>
-        <strong>Precio:</strong> ${{price}}<br>
-        <strong>Stock:</strong> {{stock}}<br>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/css/home.css" />
+    <title>Lista de Productos</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lista de Productos</h1>
+
+      {{#each products.docs}}
+        <div class="product">
+          <h2>{{title}}</h2>
+          <p>{{description}}</p>
+          <p>Precio: ${{price}}</p>
+          <p>Categoría: {{category}}</p>
+        </div>
+      {{/each}}
+
+      {{#if products.hasNextPage}}
+        <a href="?page={{products.nextPage}}">Siguiente</a>
+      {{/if}}
+
+      {{#if products.hasPrevPage}}
+        <a href="?page={{products.prevPage}}">Anterior</a>
+      {{/if}}
     </div>
-    {{/each}}
-</div>
+  </body>
+</html>

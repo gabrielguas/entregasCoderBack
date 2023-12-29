@@ -1,8 +1,6 @@
 import { Router } from "express";
-import ProductManager from "../ProductManager.js";
 
 const router = Router();
-const pm = new ProductManager('./src/products.json');
 
 router.get('/', (req, res) => {
     res.render("index", {
