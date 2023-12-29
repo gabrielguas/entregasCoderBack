@@ -7,7 +7,7 @@ class ProductDao {
   async getAllProducts() {
     return await ProductModel.find();
   }
-
+ // Esto está bien hacerlo acá, o debería hacerlo en product.router para delegar responsabilidades???
   async getAllProductsPaginate(req) {
     const { page, limit, query, sort } = req.query;
     let filter = {};
