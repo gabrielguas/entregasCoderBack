@@ -7,7 +7,7 @@ import { Server } from 'socket.io'
 import mongoose from "mongoose";
 import Handlebars from "handlebars";
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
-//import { cartsRouter } from './routes/carts.router.js'
+import  cartRouter  from './routes/carts.router.js'
 
 const app = express();
 const httpServer = app.listen(8080, () => console.log("Server listening on port 8080"));
@@ -48,7 +48,7 @@ app.use("/", viewRouter)
 
 // Routes
 app.use("/api/products", productRouter);
-//app.use("/api/carts", cartsRouter);
+app.use("/api/carts", cartRouter);
 
 
 // comunicacion del socket

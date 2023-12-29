@@ -1,5 +1,5 @@
 import { Router } from "express";
-import productDao from "../Dao/dbManager/product.dao.js";
+import productDao from "../Dao/DBManager/product.dao.js";
 
 const router = Router();
 
@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const products = await productDao.getAllProductsPaginate(req);
-      console.log("Mostrando los productos!");
+      console.log(products);
     res.render("home", {
       products,
     })
@@ -16,19 +16,6 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "Error al obtener productos" });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Agregar un producto
 router.post("/", async (req, res) => {
@@ -45,47 +32,56 @@ router.post("/", async (req, res) => {
 });
 
 
-
-const getProductByID_middleware = (req, res, next) => {
+// Obtener producto por su ID
+router.get("/:ID", async (req, res) => {
   const { ID } = req.params;
-  const product = pm.getProductByID(ID);
-  req.product = product;
-  next();
-};
-
-router.get("/:ID", getProductByID_middleware, (req, res) => {
-  const { product } = req;
-  res.json({ product });
+try{
+  const product = await productDao.getProductById(ID);
+  res.json(product);
+} catch (error){
+  console.log("Error al buscar el producto por ID");
+  console.log(error);
+}
 });
 
+// Actualizar producto
+router.put("/:ID", async (req, res) => {
+ const { ID } = req.params;
+ const data = req.body;
 
-// Middleware para actualizar producto
-const actualizarProductoMiddleware = (req, res, next) => {
-  const { ID } = req.params;
-  const data = req.body;
-
-  const resultado = pm.updateProduct(ID, data);
-  res.locals.resultado = resultado;
-
-  next();
-};
-
-router.put("/:ID", actualizarProductoMiddleware, (req, res) => {
-  const resultado = res.locals.resultado;
-  res.json(resultado);
+ try{
+  const product = await productDao.updateProduct(ID, data);
+  if (product){
+    res.json({
+      message:"Producto actualizado con exito"
+    });
+  } else{
+    res.json({
+      message: "No se pudo actualizar el producto"
+    })
+  }
+  }catch(error){
+    console.log(error);
+  }
 });
 
-// Middleware para eliminar producto
-const eliminarProductoMiddleware = (req, res, next) => {
+// Eliminar un producto por su ID
+router.delete("/:ID", async (req, res) => {
   const { ID } = req.params;
-  const resultado = pm.deleteProduct(ID);
-  res.locals.resultado = resultado;
-  next();
-};
-
-router.delete("/:ID", eliminarProductoMiddleware, (req, res) => {
-  const resultado = res.locals.resultado;
-  res.json(resultado);
+  try{
+    const product = await productDao.deleteProduct(ID);
+    if (product){
+      res.json({
+        message:"Producto eliminado con exito"
+      });
+    } else{
+      res.json({
+        message: "No se encontro en producto en la base de datos"
+      })
+    }
+  } catch (error){
+    console.log("Error al eliminar el producto");
+  }
 });
 
 export default router;

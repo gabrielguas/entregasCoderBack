@@ -3,7 +3,7 @@ import CartManager from "../CartManager.js";
 
 const router = Router();
 const cartManager = new CartManager('./src/carrito.json');
-
+import cartDao from "../Dao/DBManager/cart.dao.js";
 // Middleware para obtener un carrito por ID
 const getCartByIdMiddleware = (req, res, next) => {
     const cartId = req.params.cid;
@@ -17,10 +17,27 @@ const getCartByIdMiddleware = (req, res, next) => {
 };
 
 // Crear carrito
-router.post('/', (req, res) => {
-    const newCart = cartManager.createCart();
-    res.json(newCart);
-});
+// router.post('/', (req, res) => {
+//     const newCart = cartManager.createCart();
+//     res.json(newCart);
+// });
+
+router.post("/:uid", async (req, res) => {
+    try {
+      const uid = req.params.uid;
+      const newCart = await cartDao.createCart(uid)
+      res.status(201).json(newCart);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error al crear el carrito" });
+    }
+  });
+
+
+
+
+
+
 
 // Obtener productos de un carrito por su cid
 router.get('/:cid', getCartByIdMiddleware, (req, res) => {
