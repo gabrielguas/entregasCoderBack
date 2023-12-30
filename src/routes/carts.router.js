@@ -4,24 +4,8 @@ import CartManager from "../CartManager.js";
 const router = Router();
 const cartManager = new CartManager('./src/carrito.json');
 import cartDao from "../Dao/DBManager/cart.dao.js";
-// Middleware para obtener un carrito por ID
-const getCartByIdMiddleware = (req, res, next) => {
-    const cartId = req.params.cid;
-    const cart = cartManager.getCartById(cartId);
 
-    if (!cart) {
-        return res.status(404).json({ error: 'Carrito no encontrado' });
-    }
-    req.cart = cart;
-    next();
-};
-
-// Crear carrito
-// router.post('/', (req, res) => {
-//     const newCart = cartManager.createCart();
-//     res.json(newCart);
-// });
-
+// Crear el carrito, le paso el ID del usuario como parametro
 router.post("/:uid", async (req, res) => {
     try {
       const uid = req.params.uid;
@@ -34,19 +18,20 @@ router.post("/:uid", async (req, res) => {
   });
 
 
-
-
-
-
-
-// Obtener productos de un carrito por su cid
-router.get('/:cid', getCartByIdMiddleware, (req, res) => {
-    const cart = req.cart;
-    res.json(cart.getProducts());
-});
+// Obtener productos del carrito por su ID
+router.get("/:cid", async (req,res) => {
+  try{
+    const cid = req.params.cid;
+    const cart = await cartDao.getProductById(cid);
+    console.log("Productos: ",cart.products);
+  }catch(error){
+    console.log(error);
+    res.status(500).json({ error: "Error al obtener los productos del carrito" });
+  }
+})
 
 // Agregar productos
-router.post('/:cid/product/:pid', getCartByIdMiddleware, (req, res) => {
+router.post('/:cid/product/:pid',(req, res) => {
     const cart = req.cart;
     const productId = req.params.pid;
 
