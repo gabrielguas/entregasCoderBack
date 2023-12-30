@@ -1,0 +1,26 @@
+<!-- verProducts.hbs -->
+
+<h1>{{product.title}}</h1>
+<p>{{product.description}}</p>
+<p>Código: {{product.code}}</p>
+<p>Precio: ${{product.price}}</p>
+<p>Estado: {{#if product.status}} Disponible {{else}} Agotado {{/if}}</p>
+<p>Stock: {{product.stock}}</p>
+<p>Categoría: {{product.category}}</p>
+
+{{#if product.thumbnail.length}}
+  <p>Imágenes:</p>
+  <ul>
+    {{#each product.thumbnail as |image|}}
+      <li><img src="{{image}}" alt="Thumbnail" /></li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No hay imágenes disponibles.</p>
+{{/if}}
+
+<!-- Botones -->
+<div>
+  <a href="/api/products">Volver</a>
+  <button onclick="agregarAlCarrito('{{product._id}}')">Agregar al carrito</button>
+</div>

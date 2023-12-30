@@ -27,6 +27,12 @@ app.engine(
     extname: "hbs",
     defaultLayout: "main",
     handlebars: allowInsecurePrototypeAccess(Handlebars),
+    helpers: {
+      // Función de ayuda para codificar objetos a JSON
+      json: function (context) {
+        return JSON.stringify(context);
+      }
+    }
   })
 );
 
@@ -53,22 +59,22 @@ app.use("/api/carts", cartRouter);
 
 // comunicacion del socket
 
-socketServer.on('connection', (socketClient) => {
-    const pm = new ProductManager('./src/products.json');
-    const products = pm.getProducts();
-    console.log("Nuevo cliente conectado");
+// socketServer.on('connection', (socketClient) => {
+//     const pm = new ProductManager('./src/products.json');
+//     const products = pm.getProducts();
+//     console.log("Nuevo cliente conectado");
 
-    socketClient.on("message", (data) => {
-        console.log(data);
-    })
-    socketClient.emit("sendProducts",products)
+//     socketClient.on("message", (data) => {
+//         console.log(data);
+//     })
+//     socketClient.emit("sendProducts",products)
 
 
-    socketClient.on("newProduct", (data) => {
-        pm.addProduct(data)
-    })
+//     socketClient.on("newProduct", (data) => {
+//         pm.addProduct(data)
+//     })
 
-    socketClient.on("deleteProduct", (ID) =>{
-        pm.deleteProduct(ID)
-    } )
-})
+//     socketClient.on("deleteProduct", (ID) =>{
+//         pm.deleteProduct(ID)
+//     } )
+// })

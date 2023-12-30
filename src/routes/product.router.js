@@ -84,4 +84,19 @@ router.delete("/:ID", async (req, res) => {
   }
 });
 
+
+
+router.get("/detalle/:ID", async (req, res) => {
+  const { ID } = req.params;
+  try {
+    const product = await productDao.getProductById(ID);
+    res.render("verProduct", { product });
+  } catch (error) {
+    console.log("Error al buscar el producto por ID");
+    console.log(error);
+    res.status(500).json({ error: "Error al buscar el producto por ID" });
+  }
+});
+
+
 export default router;

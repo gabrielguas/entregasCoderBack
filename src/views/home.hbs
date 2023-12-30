@@ -1,34 +1,23 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/home.css" />
-    <title>Lista de Productos</title>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Lista de Productos</h1>
+<div class="container">
+  <h1>Lista de Productos</h1>
 
-      {{#each products.docs}}
-        <div class="product">
-          <h2>{{title}}</h2>
-          <p>{{description}}</p>
-          <p>Precio: ${{price}}</p>
-          <p>Categoría: {{category}}</p>
-          <p>ID: {{_id}}</p>
-        </div>
-      {{/each}}
-
-
-<!-- Estoy intentando que al cambiar de pagina por ejemplo : http://localhost:8080/api/products?sort=asc al hacer click en siguiente no vaya a    http://localhost:8080/api/products/?page=2 -->
-{{#if products.hasNextPage}}
-  <a href="?page={{products.nextPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}">Siguiente</a>
-{{/if}}
-
-{{#if products.hasPrevPage}}
-  <a href="?page={{products.prevPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}">Anterior</a>
-{{/if}}
-
+  {{#each products.docs}}
+    <div class="product">
+      <h2>{{title}}</h2>
+      <p>{{description}}</p>
+      <p>Precio: ${{price}}</p>
+      <!-- Enlace para ver más detalles del producto -->
+      <a href="/api/products/detalle/{{_id}}">Ver más</a>
+      <!-- Botón de agregar al carrito -->
+      <button onclick="agregarAlCarrito('{{_id}}')">Agregar al carrito</button>
     </div>
-  </body>
-</html>
+  {{/each}}
+
+  {{#if products.hasNextPage}}
+    <a href="?page={{products.nextPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}">Siguiente</a>
+  {{/if}}
+
+  {{#if products.hasPrevPage}}
+    <a href="?page={{products.prevPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}">Anterior</a>
+  {{/if}}
+</div>
