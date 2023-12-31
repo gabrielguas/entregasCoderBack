@@ -1,23 +1,23 @@
 <div class="container">
-  <h1>Lista de Productos</h1>
+  <h1 class="mt-4 mb-4">Lista de Productos</h1>
 
   {{#each products.docs}}
-    <div class="product">
-      <h2>{{title}}</h2>
-      <p>{{description}}</p>
-      <p>Precio: ${{price}}</p>
-      <!-- Enlace para ver más detalles del producto -->
-      <a href="/api/products/detalle/{{_id}}">Ver más</a>
-      <!-- Botón de agregar al carrito -->
-      <button onclick="agregarAlCarrito('{{_id}}')">Agregar al carrito</button>
+    <div class="product card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">{{title}}</h2>
+        <p class="card-text">{{description}}</p>
+        <p class="card-text">Precio: ${{price}}</p>
+        <a href="/api/products/detalle/{{_id}}" class="btn btn-primary">Ver más</a>
+        <button onclick="agregarAlCarrito('{{_id}}')" class="btn btn-success">Agregar al carrito</button>
+      </div>
     </div>
   {{/each}}
 
   {{#if products.hasNextPage}}
-    <a href="?page={{products.nextPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}">Siguiente</a>
+    <a href="?page={{products.nextPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}" class="btn btn-secondary">Siguiente</a>
   {{/if}}
 
   {{#if products.hasPrevPage}}
-    <a href="?page={{products.prevPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}">Anterior</a>
+    <a href="?page={{products.prevPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}" class="btn btn-secondary">Anterior</a>
   {{/if}}
 </div>

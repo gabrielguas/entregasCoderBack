@@ -3,20 +3,6 @@ import productDao from "../Dao/DBManager/product.dao.js";
 
 const router = Router();
 
-// Obtener todos los productos
-router.get("/", async (req, res) => {
-  try {
-    const products = await productDao.getAllProductsPaginate(req);
-      console.log(products);
-    res.render("home", {
-      products,
-    })
-  } catch (error) {
-    console.error("Error al obtener productos:", error.message);
-    res.status(500).json({ error: "Error al obtener productos" });
-  }
-});
-
 // Agregar un producto
 router.post("/", async (req, res) => {
   try {
