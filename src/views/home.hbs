@@ -21,3 +21,23 @@
     <a href="?page={{products.prevPage}}{{#if products.query}}&query={{products.query}}{{/if}}{{#if products.sort}}&sort={{products.sort}}{{/if}}" class="btn btn-secondary">Anterior</a>
   {{/if}}
 </div>
+<script>
+  async function agregarAlCarrito(productId) {
+    try {
+      const response = await fetch(`/api/carts/658eccc66fa5da2b93311bd2/products/${productId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        alert('Producto agregado al carrito exitosamente.');
+      } else {
+        alert('Hubo un problema al agregar el producto al carrito.');
+      }
+    } catch (error) {
+      console.error('Error al agregar el producto al carrito:', error);
+      alert('Error al agregar el producto al carrito.');
+    }
+  }
+</script>
