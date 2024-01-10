@@ -1,10 +1,8 @@
 import { Router } from "express";
-import CartManager from "../CartManager.js";
 import mongoose from "mongoose";
 import productDao from "../Dao/DBManager/product.dao.js";
 
 const router = Router();
-const cartManager = new CartManager('./src/carrito.json');
 import cartDao from "../Dao/DBManager/cart.dao.js";
 
 // Crear el carrito, le paso el ID del usuario como parametro
