@@ -3,6 +3,18 @@ import productDao from "../Dao/DBManager/product.dao.js";
 
 const router = Router();
 
+// Listar todos los productos
+router.get("/", async (req, res) => {
+  try {
+    const products = await productDao.getAllProducts(req);
+    res.json(products);
+  } catch (error) {
+    console.error("Error al obtener todos los productos:", error);
+    res.status(500).json({ error: "Error al obtener productos" });
+  }
+});
+
+
 // Agregar un producto
 router.post("/", async (req, res) => {
   try {
@@ -71,14 +83,16 @@ router.delete("/:ID", async (req, res) => {
 
 router.get("/detalle/:ID", async (req, res) => {
   const { ID } = req.params;
+
   try {
     const product = await productDao.getProductById(ID);
-    res.render("verProduct", { product });
+    res.json(product);
   } catch (error) {
     console.log("Error al buscar el producto por ID");
     console.log(error);
     res.status(500).json({ error: "Error al buscar el producto por ID" });
   }
 });
+
 
 export default router;

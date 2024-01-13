@@ -53,6 +53,21 @@ app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // comunicacion del socket
 
 // socketServer.on('connection', (socketClient) => {
