@@ -16,3 +16,8 @@
 // const __dirname = path.resolve(currentDirectory, '..');
 
 // export default __dirname;
+
+
+
+
+// Esto me esta dando errores a la hora de rutear,,, ver como lo resuelvo dsp
