@@ -1,4 +1,25 @@
 <div class="container">
+  {{#if sessionData.name}}
+    <div class="user-info mb-4">
+      <h3>¡Bienvenido, {{sessionData.name}}!</h3>
+      {{#if sessionData.email}}
+        <p>Email: {{sessionData.email}}</p>
+      {{/if}}
+      {{#if sessionData.age}}
+        <p>Edad: {{sessionData.age}}</p>
+      {{/if}}
+      {{#if sessionData.rol}}
+        <p>Rol: {{sessionData.rol}}</p>
+      {{/if}}
+      <button onclick="cerrarSesion()" class="btn btn-danger">Cerrar Sesión</button>
+    </div>
+  {{else}}
+    <div class="user-info mb-4">
+      <h3>Bienvenido</h3>
+      <a href="/users/login" class="btn btn-primary">Iniciar Sesión</a>
+    </div>
+  {{/if}}
+
   <h1 class="mt-4 mb-4">Lista de Productos</h1>
 
   {{#each products.docs}}
@@ -38,6 +59,33 @@
     } catch (error) {
       console.error('Error al agregar el producto al carrito:', error);
       alert('Error al agregar el producto al carrito.');
+    }
+  }
+
+  
+  async function cerrarSesion() {
+    try {
+      const response = await fetch("/api/session/logout", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        if (responseData.success) {
+          alert('Sesión cerrada correctamente');
+          window.location.href = "/users/login";
+        } else {
+          alert('Error al cerrar la sesión.');
+        }
+      } else {
+        alert('Error al cerrar la sesión.');
+      }
+    } catch (error) {
+      console.error('Error al cerrar la sesión:', error);
+      alert('Error al cerrar la sesión.');
     }
   }
 </script>

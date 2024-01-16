@@ -1,7 +1,8 @@
 import express from "express";
 import productRouter from './routes/product.router.js'
+import sessionRouter from './routes/session.router.js'
 import handlebars from 'express-handlebars'
-import __dirname from "./utils/pathUtils.js";
+import __dirname from "./utils.js"
 import mongoDBConnection from "./utils/mongoDB.js";
 import viewRouter from './routes/views.routes.js'
 import { Server } from 'socket.io'
@@ -11,6 +12,8 @@ import  cartRouter  from './routes/carts.router.js'
 import session from "express-session";
 import FileStore from 'session-file-store'
 import MongoStore from "connect-mongo";
+import usersViewrouter from './routes/users.views.router.js';
+
 
 const app = express();
 const httpServer = app.listen(8080, () => console.log("Server listening on port 8080"));
@@ -42,7 +45,7 @@ app.set("view engine", "hbs")
 app.set("views", `${__dirname}/views`);
 
 // Public
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(__dirname + '/public'));
 
 
 // Middlewares
@@ -74,12 +77,15 @@ app.use(session(
   }
 ))
 
-// Routes
+// Routes views
+app.use("/", viewRouter);
+app.use("/users", usersViewrouter)
+
+
+// Routes API
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
-app.use("/", viewRouter)
-
-
+app.use('/api/session', sessionRouter);
 
 
 // comunicacion del socket
