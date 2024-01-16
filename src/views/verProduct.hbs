@@ -1,0 +1,44 @@
+<h1 class="mt-4">{{product.title}}</h1>
+<p>{{product.description}}</p>
+<p>Código: {{product.code}}</p>
+<p>Precio: ${{product.price}}</p>
+<p>Estado: {{#if product.status}} Disponible {{else}} Agotado {{/if}}</p>
+<p>Stock: {{product.stock}}</p>
+<p>Categoría: {{product.category}}</p>
+
+{{!-- {{#if product.thumbnail.length}}
+  <p class="mt-3">Imágenes:</p>
+  <ul class="list-unstyled">
+    {{#each product.thumbnail as |image|}}
+      <li><img src="{{image}}" alt="Thumbnail" class="img-thumbnail" /></li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No hay imágenes disponibles.</p>
+{{/if}} --}}
+
+<div class="mt-4">
+  <a href="/products" class="btn btn-secondary">Volver</a>
+  <button onclick="agregarAlCarrito('{{product._id}}')" class="btn btn-success">Agregar al carrito</button>
+</div>
+
+<script>
+  async function agregarAlCarrito(productId) {
+    try {
+      const response = await fetch(`/api/carts/658eccc66fa5da2b93311bd2/products/${productId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        alert('Producto agregado al carrito exitosamente.');
+      } else {
+        alert('Hubo un problema al agregar el producto al carrito.');
+      }
+    } catch (error) {
+      console.error('Error al agregar el producto al carrito:', error);
+      alert('Error al agregar el producto al carrito.');
+    }
+  }
+</script>
