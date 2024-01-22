@@ -6,11 +6,6 @@ import passport from "passport";
 
 const router = Router();
 
-
-
-
-
-
 // Register
 router.post("/register",passport.authenticate('register',{failureRedirect: '/api/session/fail-register'}), async (req, res) => {
   console.log("Registrando usuario: ");
@@ -21,7 +16,6 @@ router.post("/register",passport.authenticate('register',{failureRedirect: '/api
 // Login
 router.post("/login",passport.authenticate('login',{failureRedirect: '/api/session/fail-login'}), async (req, res) => {
   console.log("Usuario encontrado para el login: ");
-
   const user = req.user
   console.log(user);
 
@@ -40,8 +34,27 @@ router.post("/login",passport.authenticate('login',{failureRedirect: '/api/sessi
 });
 
 
+// Passport GitHub
+
+router.get("/github", passport.authenticate('github', { scope: ['user:email']}),
+async (req,res) => {})
+
+router.get('/githubcallback', passport.authenticate('github', {failureRedirect: '/github/error'}), async( req,res ) =>{
+  const user = req.user;
+  req.session.user = {
+    name: `${user.first_name} ${user.last_name}`,
+    email: user.email,
+    age: 18,
+    rol: user.rol,
+  };
+  res.redirect("/users")
+}
+)
 
 
+
+
+// Cerrar sesion
 router.get("/logout", (req, res) => {
   req.session.destroy((error) => {
     if (error) {

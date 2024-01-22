@@ -1,6 +1,7 @@
 import express from "express";
 import productRouter from "./routes/product.router.js";
 import sessionRouter from "./routes/session.router.js";
+import githubLoginViewRouter from "./routes/github-login.views.router.js"
 import handlebars from "express-handlebars";
 import __dirname from "./utils.js";
 import mongoDBConnection from "./utils/mongoDB.js";
@@ -15,6 +16,7 @@ import MongoStore from "connect-mongo";
 import usersViewrouter from "./routes/users.views.router.js";
 import passport from "passport";
 import initializePassport from "./config/passport.config.js";
+
 
 const app = express();
 const httpServer = app.listen(8080, () =>
@@ -81,6 +83,7 @@ app.use(passport.session());
 // Routes views
 app.use("/", viewRouter);
 app.use("/users", usersViewrouter);
+app.use("/github", githubLoginViewRouter);
 
 // Routes API
 app.use("/api/products", productRouter);
