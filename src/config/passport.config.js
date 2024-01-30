@@ -11,29 +11,28 @@ const localStrategy = passportLocal.Strategy;
 const initializePassport = () => {
 
   //Register
-  passport.use('register', new localStrategy(
-    { passReqToCallback: true, usernameField: 'email' },
-    async (req, username, password, done) => {
-      const { first_name, last_name, email, age, rol } = req.body;
-      try {
-        const exist = await userModel.findOne({ email });
-        if (exist) {
-          console.log("Ya hay un usuario registrado con ese email");
-          done(null, false);
-        }
-
-        const result = await userModel.create({ first_name, last_name, email, age, password: createHash(password), rol });
-        res.send({
-          status: "success",
-          message: "Usuario creado con éxito, ID: " + result._id,
-        });
-        return done(null, result);
-
-      } catch (error) {
-        return done("Error registrando al usuario: " + error);
+//Register
+passport.use('register', new localStrategy(
+  { passReqToCallback: true, usernameField: 'email' },
+  async (req, username, password, done) => {
+    const { first_name, last_name, email, age, role } = req.body;
+    try {
+      const exist = await userModel.findOne({ email });
+      if (exist) {
+        console.log("Ya hay un usuario registrado con ese email");
+        return done(null, false, { message: 'Usuario ya registrado' });
       }
+
+      const result = await userModel.create({ first_name, last_name, email, age, password: createHash(password), role });
+      console.log("Usuario creado con éxito, ID: " + result._id);
+      return done(null, result);
+
+    } catch (error) {
+      return done(error);
     }
-  ))
+  }
+));
+
 
   //Login
   passport.use('login', new localStrategy(

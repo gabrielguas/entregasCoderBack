@@ -1,15 +1,14 @@
 import { Router } from "express";
-import userModel from "../models/user.model.js";
-import { createHash, isValidPassword } from "../utils.js";
 import passport from "passport";
 
 
 const router = Router();
 
 // Register
-router.post("/register",passport.authenticate('register',{failureRedirect: '/api/session/fail-register'}), async (req, res) => {
+router.post("/register",passport.authenticate('register',{failureRedirect: '/api/session/fail-register', successRedirect: '/users/login'}), async (req, res) => {
   console.log("Registrando usuario: ");
   res.status(201).send({ status: "success", message:"Usuario creado con exito!"})
+  
 });
 
 
@@ -50,6 +49,39 @@ router.get('/githubcallback', passport.authenticate('github', {failureRedirect: 
   res.redirect("/users")
 }
 )
+
+
+// Ruta para obtener el usuario actual
+router.get("/current", (req, res) => {
+  if (req.isAuthenticated()) {
+    const user = req.user;
+
+    const currentUser = {
+      name: `${user.first_name} ${user.last_name}`,
+      email: user.email,
+      age: user.age,
+      rol: user.rol,
+    };
+
+    res.json({
+      success: true,
+      user: currentUser,
+      msg: "Usuario actual obtenido correctamente",
+    });
+  } else {
+    res.status(401).json({
+      success: false,
+      msg: "No hay un usuario autenticado",
+    });
+  }
+});
+
+
+
+
+
+
+
 
 
 

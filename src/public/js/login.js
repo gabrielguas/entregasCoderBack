@@ -1,5 +1,4 @@
 const form = document.getElementById("loginForm");
-console.log("!!!!!!!!!");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
