@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estás en tiempo real - {{ nombre }}</title>
+    <link rel="stylesheet" href="/css/realTimeProducts.css">
+</head>
+
+<body>
+    <div>
+        <h1>Estás realtimeProducts - {{ nombre }}</h1>
+        <form>
+            <label for="productId">Eliminar por ID:</label>
+            <input type="number" id="productId" name="productId" required>
+            <input type="submit" value="Eliminar" id="deleteProduct">
+        </form>
+        <form>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" value="Título precargado">
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description">Descripción precargada</textarea>
+
+            <label for="code">Code:</label>
+            <input type="text" id="code" name="code" value="Código precargado">
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" value="100.00">
+
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="active" selected>Activo</option>
+                <option value="inactive">Inactivo</option>
+            </select>
+
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" value="50">
+
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" value="Categoría precargada">
+
+            <label for="thumbnails">Thumbnails:</label>
+            <input type="text" id="thumbnails" name="thumbnails" value="URL_de_la_miniatura">
+
+            <input type="submit" value="Agregar" id="addProduct">
+        </form>
+        <ul id="products"> </ul>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/main.js"></script>
+    </div>
+</body>
+
+</html>

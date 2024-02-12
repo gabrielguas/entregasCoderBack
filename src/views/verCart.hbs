@@ -1,0 +1,26 @@
+{{#if products.length}}
+  <ul class="list-group">
+    {{#each products}}
+      <li class="list-group-item">
+        <h2>{{this.title}}</h2>
+        <p>{{this.description}}</p>
+        <p>Código: {{this.code}}</p>
+        <p>Precio: ${{this.price}}</p>
+        <p>Categoría: {{this.category}}</p>
+        <p>Cantidad: {{this.quantity}}</p>
+        <p>Total por Tipo: ${{this.total}}</p>
+      </li>
+    {{/each}}
+  </ul>
+
+  <!-- Cantidad total y Precio total -->
+  <div class="mt-3">
+    {{#each totalByType}}
+      <p>Cantidad Total de {{@key}}: {{this.quantity}}</p>
+      <p>Precio Total de {{@key}}: ${{this.total}}</p>
+    {{/each}}
+  </div>
+
+{{else}}
+  <p>No hay productos en el carrito.</p>
+{{/if}}
